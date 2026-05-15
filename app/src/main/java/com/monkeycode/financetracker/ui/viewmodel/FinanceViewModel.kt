@@ -46,8 +46,19 @@ class FinanceViewModel @Inject constructor(
     val error: SharedFlow<String> = _error.asSharedFlow()
 
     init {
-        loadRecords()
-        loadTotalStats()
+        initializeData()
+    }
+
+    private fun initializeData() {
+        viewModelScope.launch {
+            try {
+                transactionTypeRepository.ensureInitialized()
+                loadRecords()
+                loadTotalStats()
+            } catch (e: Exception) {
+                _error.emit("初始化失败: ${e.message}")
+            }
+        }
     }
 
     fun updateFilter(condition: QueryCondition) {

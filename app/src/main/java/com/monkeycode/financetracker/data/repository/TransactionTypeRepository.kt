@@ -5,8 +5,10 @@ import com.monkeycode.financetracker.data.mapper.toDomain
 import com.monkeycode.financetracker.data.mapper.toEntity
 import com.monkeycode.financetracker.domain.model.FlowType
 import com.monkeycode.financetracker.domain.model.TransactionType
+import com.monkeycode.financetracker.data.model.TransactionTypeEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import java.time.LocalDateTime
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -14,6 +16,62 @@ import javax.inject.Singleton
 class TransactionTypeRepository @Inject constructor(
     private val transactionTypeDao: TransactionTypeDao
 ) {
+    private var isInitialized = false
+
+    suspend fun ensureInitialized() {
+        if (isInitialized) return
+        
+        val count = transactionTypeDao.getCount()
+        if (count == 0L) {
+            insertPresetTypes()
+        }
+        isInitialized = true
+    }
+
+    private suspend fun insertPresetTypes() {
+        val now = LocalDateTime.now()
+        
+        val presetExpenseTypes = listOf(
+            "日常消费" to 0L,
+            "房贷" to 1L,
+            "借呗" to 2L,
+            "花呗" to 3L,
+            "京东白条" to 4L,
+            "信用卡 - 平安" to 5L,
+            "信用卡 - 邮储" to 6L,
+            "投资理财" to 7L,
+            "人情往来" to 8L
+        )
+
+        val presetIncomeTypes = listOf(
+            "工资" to 0L,
+            "转账" to 1L,
+            "理财赎回" to 2L,
+            "退税" to 3L
+        )
+
+        presetExpenseTypes.forEach { (name, sort) ->
+            transactionTypeDao.insert(
+                TransactionTypeEntity(
+                    name = name,
+                    flowType = FlowType.EXPENSE,
+                    sortOrder = sort,
+                    createTime = now
+                )
+            )
+        }
+
+        presetIncomeTypes.forEach { (name, sort) ->
+            transactionTypeDao.insert(
+                TransactionTypeEntity(
+                    name = name,
+                    flowType = FlowType.INCOME,
+                    sortOrder = sort,
+                    createTime = now
+                )
+            )
+        }
+    }
 
     fun getByFlowTypeStream(flowType: FlowType): Flow<List<TransactionType>> {
         return transactionTypeDao.getByFlowType(flowType).map { list ->

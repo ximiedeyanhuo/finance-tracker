@@ -29,7 +29,8 @@ object DatabaseModule {
             context,
             AppDatabase::class.java,
             AppDatabase.DATABASE_NAME
-        ).addCallback(DatabaseInitializerCallback())
+        )
+         .fallbackToDestructiveMigration()
          .build()
     }
 
