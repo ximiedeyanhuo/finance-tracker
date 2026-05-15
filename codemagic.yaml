@@ -7,6 +7,8 @@ workflows:
       android: true
       groups:
         - android
+      vars:
+        GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.jvmargs=-Xmx4096m -XX:+HeapDumpOnOutOfMemoryError"
     
     trigger:
       push:
@@ -21,6 +23,8 @@ workflows:
         script: |
           export ANDROID_HOME=$HOME/android-sdk
           export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+          export GRADLE_USER_HOME=$HOME/.gradle
+          export JAVA_HOME=$HOME/.jdks/openjdk-17
       
       - name: Accept Android licenses
         script: |
@@ -30,22 +34,45 @@ workflows:
           echo "d975f751698a77b662f1254ddbeed3901e976f5a" >> $ANDROID_HOME/licenses/android-sdk-license
           echo "504667f4c0de7af1536de33381a6f4f440654048" >> $ANDROID_HOME/licenses/android-sdk-license
           echo "6010856824d061f58336a7515ba6a213363abb7f" >> $ANDROID_HOME/licenses/android-sdk-license
+          echo "8933bad161af4178b1185d1a37fbf302f83f6101" >> $ANDROID_HOME/licenses/android-sdk-license
+          echo "743ff9092385c0d2d78f989d5e75b8385bfca8ad" >> $ANDROID_HOME/licenses/android-sdk-license
+          echo "859f317696f67ef3d7f30a50a5560e7804e37dd8" >> $ANDROID_HOME/licenses/android-sdk-license
       
       - name: Install required SDK components
         script: |
           sdkmanager --install "platform-tools" "build-tools;34.0.0" "platforms;android-34"
+          sdkmanager --list
       
-      - name: Set Gradle wrapper permissions
+      - name: Make gradlew executable
         script: |
           chmod +x gradlew
+          ls -la gradlew
       
-      - name: Set Gradle options
+      - name: Create gradle.properties
         script: |
-          export GRADLE_OPTS="-Dorg.gradle.daemon=false -Dorg.gradle.jvmargs=-Xmx3072m"
+          cat > gradle.properties << EOF
+          org.gradle.jvmargs=-Xmx4096m
+          org.gradle.daemon=false
+          org.gradle.parallel=true
+          org.gradle.workers.max=2
+          android.useAndroidX=true
+          EOF
+          cat gradle.properties
+      
+      - name: Clean Gradle cache
+        script: |
+          rm -rf ~/.gradle/caches/transforms-*
+          rm -rf app/build
+          rm -rf build
       
       - name: Build Debug APK
         script: |
-          ./gradlew clean assembleDebug --no-daemon --stacktrace
+          ./gradlew clean assembleDebug --stacktrace --info --no-daemon --max-workers=2
+      
+      - name: Verify APK
+        script: |
+          ls -lh app/build/outputs/apk/debug/
+          file app/build/outputs/apk/debug/app-debug.apk
     
     artifacts:
       - app/build/outputs/apk/debug/app-debug.apk
