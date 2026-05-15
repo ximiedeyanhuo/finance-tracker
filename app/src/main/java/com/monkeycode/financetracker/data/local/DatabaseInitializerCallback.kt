@@ -1,14 +1,14 @@
 package com.monkeycode.financetracker.data.local
 
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SQLiteDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.monkeycode.financetracker.domain.model.FlowType
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class DatabaseInitializerCallback : RoomDatabase.Callback() {
 
-    override fun onCreate(db: SQLiteDatabase) {
+    override fun onCreate(db: SupportSQLiteDatabase) {
         super.onCreate(db)
         
         val presetExpenseTypes = listOf(

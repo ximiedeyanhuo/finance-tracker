@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.monkeycode.financetracker.domain.model.FinanceRecord
 import com.monkeycode.financetracker.ui.components.AmountText
 import com.monkeycode.financetracker.ui.navigation.Screen
 import com.monkeycode.financetracker.ui.theme.*

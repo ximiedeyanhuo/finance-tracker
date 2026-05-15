@@ -18,6 +18,7 @@ import com.monkeycode.financetracker.domain.model.DailyStats
 import com.monkeycode.financetracker.domain.model.MonthlyStats
 import com.monkeycode.financetracker.domain.model.WeeklyStats
 import com.monkeycode.financetracker.domain.model.YearlyStats
+import java.math.BigDecimal
 import com.monkeycode.financetracker.ui.components.AmountText
 import com.monkeycode.financetracker.ui.theme.*
 import com.monkeycode.financetracker.ui.viewmodel.DailyStatsViewModel

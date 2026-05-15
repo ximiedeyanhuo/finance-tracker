@@ -50,7 +50,7 @@ class TransactionTypeRepository @Inject constructor(
     suspend fun updateType(type: TransactionType): Result<Unit> {
         return try {
             val duplicateCount = transactionTypeDao.checkDuplicateName(
-                flowType = type.flowType.toEntityFlowType(),
+                flowType = type.flowType,
                 name = type.name,
                 excludeId = type.id
             )

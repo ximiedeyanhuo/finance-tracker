@@ -2,7 +2,7 @@ package com.monkeycode.financetracker.data.repository
 
 import com.monkeycode.financetracker.data.mapper.toDomain
 import com.monkeycode.financetracker.data.mapper.toEntity
-import com.monkeycode.financetracker.data.model.toSafeBigDecimal
+import com.monkeycode.financetracker.data.mapper.toSafeBigDecimal
 import com.monkeycode.financetracker.domain.model.FinanceRecord
 import com.monkeycode.financetracker.domain.model.FlowType
 import com.monkeycode.financetracker.domain.model.QueryCondition
