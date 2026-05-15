@@ -3,35 +3,40 @@ name: Android Build
 on:
   push:
     branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
-    
+
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
-      
-    - name: Install SDK Components
-      run: |
-        sdkmanager --licenses || echo "Licenses accepted"
-        sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
-    
-    - name: Make gradlew executable
-      run: chmod +x gradlew
-    
+
+    - name: Cache Gradle Wrapper
+      uses: actions/cache@v3
+      with:
+        path: ~/.gradle/caches
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+        restore-keys: |
+          ${{ runner.os }}-gradle-
+
+    - name: Make Gradle executable
+      run: chmod +x ./gradlew
+
     - name: Build with Gradle
-      run: ./gradlew assembleDebug --no-daemon --stacktrace --info
-    
+      run: ./gradlew assembleDebug --no-daemon
+
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
