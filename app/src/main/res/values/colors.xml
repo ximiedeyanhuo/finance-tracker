@@ -24,4 +24,8 @@
     <color name="text_secondary">#666666</color>
     <color name="text_hint">#999999</color>
     <color name="text_on_primary">#FFFFFF</color>
+    
+    <!-- Launcher Icon Colors -->
+    <color name="ic_launcher_background">#3388cc</color>
+    <color name="ic_launcher_foreground">#FFFFFF</color>
 </resources>
