@@ -17,6 +17,24 @@ workflows:
     working_directory: /home/builder/code
     
     scripts:
+      - name: Set environment variables
+        script: |
+          export ANDROID_HOME=$HOME/android-sdk
+          export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+      
+      - name: Accept Android licenses
+        script: |
+          mkdir -p $ANDROID_HOME/licenses
+          echo "24333f8a63b6825ea9c5514f83c2829b004d1fee" > $ANDROID_HOME/licenses/android-sdk-license
+          echo "84831b9409646a918e30573bab4c9c91346d8abd" >> $ANDROID_HOME/licenses/android-sdk-license
+          echo "d975f751698a77b662f1254ddbeed3901e976f5a" >> $ANDROID_HOME/licenses/android-sdk-license
+          echo "504667f4c0de7af1536de33381a6f4f440654048" >> $ANDROID_HOME/licenses/android-sdk-license
+          echo "6010856824d061f58336a7515ba6a213363abb7f" >> $ANDROID_HOME/licenses/android-sdk-license
+      
+      - name: Install required SDK components
+        script: |
+          sdkmanager --install "platform-tools" "build-tools;34.0.0" "platforms;android-34"
+      
       - name: Set Gradle wrapper permissions
         script: |
           chmod +x gradlew
@@ -36,4 +54,3 @@ workflows:
       cache_paths:
         - $HOME/.gradle/caches
         - $HOME/.gradle/wrapper
-        - $HOME/android-sdk
