@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Semantic Colors -->
+    <color name="income">#007979</color>
+    <color name="expense">#804040</color>
+    <color name="balance_positive">#000000</color>
+    <color name="balance_negative">#804040</color>
+    <color name="primary">#3388cc</color>
+    <color name="primary_variant">#2878b8</color>
+    
+    <!-- Background Colors -->
+    <color name="background">#FFFFFF</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="error">#B00020</color>
+    
+    <!-- List Row Alternating Colors -->
+    <color name="row_even">#DCDCDC</color>
+    <color name="row_odd">#B0C4DE</color>
+    <color name="row_today">#D8D8EB</color>
+    <color name="row_outside_month">#F5F5F5</color>
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#000000</color>
+    <color name="text_secondary">#666666</color>
+    <color name="text_hint">#999999</color>
+    <color name="text_on_primary">#FFFFFF</color>
+</resources>

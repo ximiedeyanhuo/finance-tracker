@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">记账本</string>
+    
+    <!-- Navigation -->
+    <string name="nav_detail">明细</string>
+    <string name="nav_calendar">日历</string>
+    <string name="nav_daily">日账</string>
+    <string name="nav_weekly">周账</string>
+    <string name="nav_monthly">月账</string>
+    <string name="nav_yearly">年账</string>
+    <string name="nav_types">类型</string>
+    
+    <!-- Common -->
+    <string name="common_income">收入</string>
+    <string name="common_expense">支出</string>
+    <string name="common_balance">结余</string>
+    <string name="common_add">新增</string>
+    <string name="common_query">查询</string>
+    <string name="common_reset">重置</string>
+    <string name="common_export">导出</string>
+    <string name="common_edit">修改</string>
+    <string name="common_delete">删除</string>
+    <string name="common_detail">详细</string>
+    <string name="common_copy">复制</string>
+    <string name="common_save">保存</string>
+    <string name="common_cancel">取消</string>
+    <string name="common_confirm">确认</string>
+    <string name="common_loading">加载中…</string>
+    <string name="common_empty">暂无数据</string>
+    
+    <!-- Finance Detail -->
+    <string name="detail_title">财务明细</string>
+    <string name="detail_filter_all">全部</string>
+    <string name="detail_filter_with_image">包含图片</string>
+    <string name="detail_filter_without_image">不含图片</string>
+    <string name="detail_remark_hint">备注关键词</string>
+    <string name="detail_add_record">新增记录</string>
+    <string name="detail_edit_record">修改记录</string>
+    <string name="detail_confirm_delete">确认删除</string>
+    <string name="detail_delete_message">删除后不可恢复，是否继续？</string>
+    <string name="detail_save_success">保存成功</string>
+    <string name="detail_add_type_first">请先添加收支类型！</string>
+    
+    <!-- Calendar -->
+    <string name="calendar_title">日历</string>
+    <string name="calendar_previous">上月</string>
+    <string name="calendar_next">下月</string>
+    <string name="calendar_click_date_hint">点击日期可查看明细</string>
+    
+    <!-- Stats -->
+    <string name="stats_income_total">收入总额</string>
+    <string name="stats_expense_total">支出总额</string>
+    <string name="stats_category_detail">%1$s 分类详情</string>
+    <string name="stats_daily">日账</string>
+    <string name="stats_weekly">周账</string>
+    <string name="stats_monthly">月账</string>
+    <string name="stats_yearly">年账</string>
+    
+    <!-- Transaction Type -->
+    <string name="type_title">收支类型</string>
+    <string name="type_add">新增类型</string>
+    <string name="type_edit">修改类型</string>
+    <string name="type_name_hint">类型名称</string>
+    <string name="type_sort_hint">排序序号</string>
+    <string name="type_in_use_error">该类型已被使用，无法删除</string>
+    <string name="type_modify_hint">修改收支类型将会同步修改业务数据收支类型</string>
+    
+    <!-- Export -->
+    <string name="export_filename_detail">账务明细_%1$s.csv</string>
+    <string name="export_filename_daily">日账汇总_%1$s.csv</string>
+    <string name="export_filename_weekly">周汇总_%1$s.csv</string>
+    <string name="export_filename_monthly">月汇总_%1$s.csv</string>
+    <string name="export_filename_yearly">年汇总_%1$s.csv</string>
+    <string name="export_share_title">分享账务数据</string>
+    
+    <!-- Date Format -->
+    <string name="date_format_display">MM-dd</string>
+    <string name="date_format_full">yyyy-MM-dd</string>
+    <string name="date_format_datetime">yyyy-MM-dd HH:mm</string>
+    <string name="date_format_datetime_sec">yyyy-MM-dd HH:mm:ss</string>
+    <string name="date_format_month">yyyy-MM</string>
+    <string name="date_format_year">yyyy</string>
+    <string name="date_format_export">yyyyMMdd_HHmmss</string>
+</resources>
