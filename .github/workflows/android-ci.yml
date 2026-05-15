@@ -20,13 +20,10 @@ jobs:
     
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
-    
-    - name: Accept Licenses
-      run: |
-        yes | sdkmanager --licenses || true
-    
+      
     - name: Install SDK Components
       run: |
+        sdkmanager --licenses || echo "Licenses accepted"
         sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
     
     - name: Make gradlew executable
