@@ -2,6 +2,7 @@ package com.monkeycode.financetracker.data.converter
 
 import androidx.room.TypeConverter
 import com.monkeycode.financetracker.domain.model.FlowType
+import java.math.BigDecimal
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -51,5 +52,17 @@ class FlowTypeConverter {
             1 -> FlowType.INCOME
             else -> throw IllegalArgumentException("Unknown FlowType value: $value")
         }
+    }
+}
+
+class BigDecimalConverter {
+    @TypeConverter
+    fun fromBigDecimal(value: BigDecimal?): String? {
+        return value?.toPlainString()
+    }
+
+    @TypeConverter
+    fun toBigDecimal(value: String?): BigDecimal? {
+        return value?.let { BigDecimal(it) }
     }
 }

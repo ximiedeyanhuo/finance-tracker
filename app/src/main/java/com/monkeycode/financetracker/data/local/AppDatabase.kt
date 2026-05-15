@@ -3,6 +3,7 @@ package com.monkeycode.financetracker.data.local
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.monkeycode.financetracker.data.converter.BigDecimalConverter
 import com.monkeycode.financetracker.data.converter.FlowTypeConverter
 import com.monkeycode.financetracker.data.converter.LocalDateConverter
 import com.monkeycode.financetracker.data.converter.LocalDateTimeConverter
@@ -20,7 +21,8 @@ import com.monkeycode.financetracker.data.model.TransactionTypeEntity
 @TypeConverters(
     LocalDateConverter::class,
     LocalDateTimeConverter::class,
-    FlowTypeConverter::class
+    FlowTypeConverter::class,
+    BigDecimalConverter::class
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun financeRecordDao(): FinanceRecordDao
