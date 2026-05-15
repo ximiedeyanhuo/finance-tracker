@@ -21,6 +21,9 @@ interface TransactionTypeDao {
     @Query("SELECT COUNT(*) FROM finance_record WHERE transaction_type_id = :id")
     suspend fun getUsageCount(id: Long): Int
 
+    @Query("SELECT COUNT(*) FROM transaction_type")
+    suspend fun getCount(): Int
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(type: TransactionTypeEntity): Long
 

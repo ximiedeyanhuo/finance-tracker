@@ -32,22 +32,22 @@ class TransactionTypeRepository @Inject constructor(
         val now = LocalDateTime.now()
         
         val presetExpenseTypes = listOf(
-            "日常消费" to 0L,
-            "房贷" to 1L,
-            "借呗" to 2L,
-            "花呗" to 3L,
-            "京东白条" to 4L,
-            "信用卡 - 平安" to 5L,
-            "信用卡 - 邮储" to 6L,
-            "投资理财" to 7L,
-            "人情往来" to 8L
+            "日常消费" to 0,
+            "房贷" to 1,
+            "借呗" to 2,
+            "花呗" to 3,
+            "京东白条" to 4,
+            "信用卡 - 平安" to 5,
+            "信用卡 - 邮储" to 6,
+            "投资理财" to 7,
+            "人情往来" to 8
         )
 
         val presetIncomeTypes = listOf(
-            "工资" to 0L,
-            "转账" to 1L,
-            "理财赎回" to 2L,
-            "退税" to 3L
+            "工资" to 0,
+            "转账" to 1,
+            "理财赎回" to 2,
+            "退税" to 3
         )
 
         presetExpenseTypes.forEach { (name, sort) ->
