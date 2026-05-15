@@ -7,6 +7,12 @@ import com.monkeycode.financetracker.domain.model.FlowType
 import kotlinx.coroutines.flow.Flow
 import java.time.LocalDate
 
+// Data class for stats query results
+data class StatsResult(
+    val income: Double?,
+    val expense: Double?
+)
+
 @Dao
 interface FinanceRecordDao {
 
@@ -49,7 +55,7 @@ interface FinanceRecordDao {
                SUM(CASE WHEN flow_type = 0 THEN amount ELSE 0 END) as expense
         FROM finance_record
     """)
-    suspend fun getTotalStats(): Map<String, Double?>
+    suspend fun getTotalStats(): StatsResult
 
     @Query("""
         SELECT SUM(CASE WHEN flow_type = 1 THEN amount ELSE 0 END) as income,
@@ -69,5 +75,5 @@ interface FinanceRecordDao {
         remarkKeyword: String? = null,
         startDate: LocalDate? = null,
         endDate: LocalDate? = null
-    ): Map<String, Double?>
+    ): StatsResult
 }

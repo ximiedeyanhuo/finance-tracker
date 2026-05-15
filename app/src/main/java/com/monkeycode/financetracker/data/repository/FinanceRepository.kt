@@ -68,8 +68,8 @@ class FinanceRepository @Inject constructor(
 
     suspend fun getTotalStats(): Pair<BigDecimal, BigDecimal> {
         val result = financeRecordDao.getTotalStats()
-        val income = result["income"]?.toBigDecimal() ?: BigDecimal.ZERO
-        val expense = result["expense"]?.toBigDecimal() ?: BigDecimal.ZERO
+        val income = result.income?.toBigDecimal() ?: BigDecimal.ZERO
+        val expense = result.expense?.toBigDecimal() ?: BigDecimal.ZERO
         return Pair(income, expense)
     }
 
@@ -82,8 +82,8 @@ class FinanceRepository @Inject constructor(
             startDate = condition.startDate,
             endDate = condition.endDate
         )
-        val income = result["income"]?.toBigDecimal() ?: BigDecimal.ZERO
-        val expense = result["expense"]?.toBigDecimal() ?: BigDecimal.ZERO
+        val income = result.income?.toBigDecimal() ?: BigDecimal.ZERO
+        val expense = result.expense?.toBigDecimal() ?: BigDecimal.ZERO
         return Pair(income, expense)
     }
 }
