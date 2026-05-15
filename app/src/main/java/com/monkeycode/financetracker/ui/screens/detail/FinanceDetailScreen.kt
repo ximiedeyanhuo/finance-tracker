@@ -187,7 +187,7 @@ fun StatsBar(
             AmountText(amount = income, isExpense = false)
         }
         
-        HorizontalDivider(
+        Divider(
             modifier = Modifier
                 .height(40.dp)
                 .align(Alignment.CenterVertically)
@@ -202,7 +202,7 @@ fun StatsBar(
             AmountText(amount = expense, isExpense = true)
         }
         
-        HorizontalDivider(
+        Divider(
             modifier = Modifier
                 .height(40.dp)
                 .align(Alignment.CenterVertically)
