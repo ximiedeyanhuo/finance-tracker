@@ -25,11 +25,11 @@ data class TransactionType(
     val createTime: LocalDateTime = LocalDateTime.now()
 )
 
-data class FlowType(val value: Int) {
-    companion object {
-        val EXPENSE = FlowType(0)
-        val INCOME = FlowType(1)
+enum class FlowType(val value: Int) {
+    EXPENSE(0),
+    INCOME(1);
 
+    companion object {
         fun fromValue(value: Int): FlowType {
             return when (value) {
                 0 -> EXPENSE

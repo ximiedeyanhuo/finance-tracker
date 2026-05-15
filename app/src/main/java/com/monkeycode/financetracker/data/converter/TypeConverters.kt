@@ -1,7 +1,7 @@
 package com.monkeycode.financetracker.data.converter
 
 import androidx.room.TypeConverter
-import com.monkeycode.financetracker.data.model.FlowType
+import com.monkeycode.financetracker.domain.model.FlowType
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter

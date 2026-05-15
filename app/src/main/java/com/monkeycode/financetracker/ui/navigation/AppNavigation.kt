@@ -14,11 +14,13 @@ import androidx.navigation.navArgument
 import com.monkeycode.financetracker.ui.components.BottomNavigationBar
 import com.monkeycode.financetracker.ui.screens.calendar.CalendarScreen
 import com.monkeycode.financetracker.ui.screens.detail.FinanceDetailScreen
+import com.monkeycode.financetracker.ui.screens.stats.CategoryStatsDetailScreen
 import com.monkeycode.financetracker.ui.screens.stats.DailyStatsScreen
 import com.monkeycode.financetracker.ui.screens.stats.MonthlyStatsScreen
 import com.monkeycode.financetracker.ui.screens.stats.WeeklyStatsScreen
 import com.monkeycode.financetracker.ui.screens.stats.YearlyStatsScreen
 import com.monkeycode.financetracker.ui.screens.types.TransactionTypeScreen
+import java.time.LocalDate
 
 @Composable
 fun AppNavigation() {
@@ -76,7 +78,15 @@ fun AppNavigation() {
                     navArgument("endDate") { type = NavType.StringType }
                 )
             ) { backStackEntry ->
-                // TODO: CategoryStatsDetailScreen
+                val flowTypeValue = backStackEntry.arguments?.getInt("flowType") ?: 0
+                val startDateArg = backStackEntry.arguments?.getString("startDate") ?: LocalDate.now().toString()
+                val endDateArg = backStackEntry.arguments?.getString("endDate") ?: LocalDate.now().toString()
+                CategoryStatsDetailScreen(
+                    navController = navController,
+                    flowTypeValue = flowTypeValue,
+                    startDateStr = startDateArg,
+                    endDateStr = endDateArg
+                )
             }
         }
     }

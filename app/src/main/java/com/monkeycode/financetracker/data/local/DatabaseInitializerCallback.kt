@@ -2,8 +2,9 @@ package com.monkeycode.financetracker.data.local
 
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SQLiteDatabase
-import com.monkeycode.financetracker.data.model.FlowType
+import com.monkeycode.financetracker.domain.model.FlowType
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class DatabaseInitializerCallback : RoomDatabase.Callback() {
 
@@ -29,20 +30,28 @@ class DatabaseInitializerCallback : RoomDatabase.Callback() {
             "退税" to 3
         )
 
-        val now = LocalDateTime.now().format(java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+        val now = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
 
-        presetExpenseTypes.forEachIndexed { index, (name, sort) ->
-            db.execSQL(
-                "INSERT INTO transaction_type (name, flow_type, sort_order, create_time) " +
-                "VALUES ('$name', 0, $sort, '$now')"
-            )
+        val insertStatement = db.compileStatement(
+            "INSERT INTO transaction_type (name, flow_type, sort_order, create_time) VALUES (?, ?, ?, ?)"
+        )
+
+        presetExpenseTypes.forEach { (name, sort) ->
+            insertStatement.bindString(1, name)
+            insertStatement.bindLong(2, FlowType.EXPENSE.value.toLong())
+            insertStatement.bindLong(3, sort.toLong())
+            insertStatement.bindString(4, now)
+            insertStatement.executeInsert()
         }
 
-        presetIncomeTypes.forEachIndexed { index, (name, sort) ->
-            db.execSQL(
-                "INSERT INTO transaction_type (name, flow_type, sort_order, create_time) " +
-                "VALUES ('$name', 1, $sort, '$now')"
-            )
+        presetIncomeTypes.forEach { (name, sort) ->
+            insertStatement.bindString(1, name)
+            insertStatement.bindLong(2, FlowType.INCOME.value.toLong())
+            insertStatement.bindLong(3, sort.toLong())
+            insertStatement.bindString(4, now)
+            insertStatement.executeInsert()
         }
+
+        insertStatement.close()
     }
 }

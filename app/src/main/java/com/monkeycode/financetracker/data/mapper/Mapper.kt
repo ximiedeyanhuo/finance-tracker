@@ -10,7 +10,7 @@ fun FinanceRecordEntity.toDomain(): FinanceRecord {
     return FinanceRecord(
         id = id,
         amount = amount,
-        flowType = FlowType.fromValue(flowType.value),
+        flowType = flowType,
         transactionTypeId = transactionTypeId,
         transactionDate = transactionDate,
         remark = remark,
@@ -24,7 +24,7 @@ fun FinanceRecord.toEntity(): FinanceRecordEntity {
     return FinanceRecordEntity(
         id = id,
         amount = amount,
-        flowType = com.monkeycode.financetracker.data.model.FlowType.valueOf(flowType.name),
+        flowType = flowType,
         transactionTypeId = transactionTypeId,
         transactionDate = transactionDate,
         remark = remark,
@@ -38,7 +38,7 @@ fun TransactionTypeEntity.toDomain(): TransactionType {
     return TransactionType(
         id = id,
         name = name,
-        flowType = FlowType.fromValue(flowType.value),
+        flowType = flowType,
         sortOrder = sortOrder,
         createTime = createTime
     )
@@ -48,7 +48,7 @@ fun TransactionType.toEntity(): TransactionTypeEntity {
     return TransactionTypeEntity(
         id = id,
         name = name,
-        flowType = com.monkeycode.financetracker.data.model.FlowType.valueOf(flowType.name),
+        flowType = flowType,
         sortOrder = sortOrder,
         createTime = createTime
     )

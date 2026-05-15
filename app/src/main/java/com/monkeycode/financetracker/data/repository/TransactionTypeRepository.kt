@@ -3,7 +3,7 @@ package com.monkeycode.financetracker.data.repository
 import com.monkeycode.financetracker.data.local.TransactionTypeDao
 import com.monkeycode.financetracker.data.mapper.toDomain
 import com.monkeycode.financetracker.data.mapper.toEntity
-import com.monkeycode.financetracker.data.model.FlowType
+import com.monkeycode.financetracker.domain.model.FlowType
 import com.monkeycode.financetracker.domain.model.TransactionType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -34,7 +34,7 @@ class TransactionTypeRepository @Inject constructor(
     suspend fun addType(type: TransactionType): Result<Long> {
         return try {
             val duplicateCount = transactionTypeDao.checkDuplicateName(
-                flowType = type.flowType.toEntityFlowType(),
+                flowType = type.flowType,
                 name = type.name
             )
             if (duplicateCount > 0) {
@@ -78,10 +78,3 @@ class TransactionTypeRepository @Inject constructor(
     }
 }
 
-private fun com.monkeycode.financetracker.domain.model.FlowType.toEntityFlowType(): FlowType {
-    return when (this.value) {
-        0 -> FlowType.EXPENSE
-        1 -> FlowType.INCOME
-        else -> throw IllegalArgumentException("Unknown FlowType value: ${this.value}")
-    }
-}

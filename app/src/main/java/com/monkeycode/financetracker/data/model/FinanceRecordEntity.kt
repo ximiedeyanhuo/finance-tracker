@@ -3,9 +3,7 @@ package com.monkeycode.financetracker.data.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.monkeycode.financetracker.data.converter.FlowTypeConverter
-import com.monkeycode.financetracker.data.converter.LocalDateConverter
-import com.monkeycode.financetracker.data.converter.LocalDateTimeConverter
+import com.monkeycode.financetracker.domain.model.FlowType
 import java.math.BigDecimal
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -19,14 +17,12 @@ data class FinanceRecordEntity(
     val amount: BigDecimal,
 
     @ColumnInfo(name = "flow_type")
-    @TypeConverters(FlowTypeConverter::class)
     val flowType: FlowType,
 
     @ColumnInfo(name = "transaction_type_id")
     val transactionTypeId: Long,
 
     @ColumnInfo(name = "transaction_date")
-    @TypeConverters(LocalDateConverter::class)
     val transactionDate: LocalDate,
 
     @ColumnInfo(name = "remark")
@@ -36,10 +32,8 @@ data class FinanceRecordEntity(
     val imagePath: String? = null,
 
     @ColumnInfo(name = "create_time")
-    @TypeConverters(LocalDateTimeConverter::class)
     val createTime: LocalDateTime = LocalDateTime.now(),
 
     @ColumnInfo(name = "update_time")
-    @TypeConverters(LocalDateTimeConverter::class)
     val updateTime: LocalDateTime = LocalDateTime.now()
 )

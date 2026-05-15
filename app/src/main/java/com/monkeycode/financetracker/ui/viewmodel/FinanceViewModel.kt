@@ -2,10 +2,10 @@ package com.monkeycode.financetracker.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.monkeycode.financetracker.data.model.FlowType
 import com.monkeycode.financetracker.data.repository.FinanceRepository
 import com.monkeycode.financetracker.data.repository.TransactionTypeRepository
 import com.monkeycode.financetracker.domain.model.FinanceRecord
+import com.monkeycode.financetracker.domain.model.FlowType
 import com.monkeycode.financetracker.domain.model.QueryCondition
 import com.monkeycode.financetracker.domain.service.ExportService
 import com.monkeycode.financetracker.domain.service.ImageService

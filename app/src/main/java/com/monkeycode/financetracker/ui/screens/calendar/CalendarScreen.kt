@@ -16,6 +16,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.monkeycode.financetracker.domain.model.FinanceRecord
+import com.monkeycode.financetracker.domain.model.FlowType
 import com.monkeycode.financetracker.ui.components.AmountText
 import com.monkeycode.financetracker.ui.theme.*
 import java.math.BigDecimal
@@ -122,12 +124,12 @@ fun MonthNavigation(
 
 @Composable
 fun MonthStatsSummary(
-    records: List<com.monkeycode.financetracker.domain.model.FinanceRecord>,
+    records: List<FinanceRecord>,
     modifier: Modifier = Modifier
 ) {
-    val income = records.filter { it.flowType.value == 1 }
+    val income = records.filter { it.flowType == FlowType.INCOME }
         .sumOf { it.amount.toDouble() }.toBigDecimal()
-    val expense = records.filter { it.flowType.value == 0 }
+    val expense = records.filter { it.flowType == FlowType.EXPENSE }
         .sumOf { it.amount.toDouble() }.toBigDecimal()
     val balance = income - expense
     
@@ -182,7 +184,7 @@ fun MonthStatsSummary(
 fun CalendarGrid(
     currentMonth: LocalDate,
     selectedDate: LocalDate,
-    records: List<com.monkeycode.financetracker.domain.model.FinanceRecord>,
+    records: List<FinanceRecord>,
     onDateSelected: (LocalDate) -> Unit
 ) {
     val yearMonth = YearMonth.from(currentMonth)
@@ -216,9 +218,9 @@ fun CalendarGrid(
                 for (i in 0 until 7) {
                     val day = current.plusDays(i.toLong())
                     val dayRecords = records.filter { it.transactionDate == day }
-                    val dayIncome = dayRecords.filter { it.flowType.value == 1 }
+                    val dayIncome = dayRecords.filter { it.flowType == FlowType.INCOME }
                         .sumOf { it.amount.toDouble() }.toBigDecimal()
-                    val dayExpense = dayRecords.filter { it.flowType.value == 0 }
+                    val dayExpense = dayRecords.filter { it.flowType == FlowType.EXPENSE }
                         .sumOf { it.amount.toDouble() }.toBigDecimal()
                     
                     CalendarCell(
@@ -297,12 +299,12 @@ fun CalendarCell(
 @Composable
 fun DayDetailPanel(
     selectedDate: LocalDate,
-    records: List<com.monkeycode.financetracker.domain.model.FinanceRecord>,
+    records: List<FinanceRecord>,
     modifier: Modifier = Modifier
 ) {
-    val dayIncome = records.filter { it.flowType.value == 1 }
+    val dayIncome = records.filter { it.flowType == FlowType.INCOME }
         .sumOf { it.amount.toDouble() }.toBigDecimal()
-    val dayExpense = records.filter { it.flowType.value == 0 }
+    val dayExpense = records.filter { it.flowType == FlowType.EXPENSE }
         .sumOf { it.amount.toDouble() }.toBigDecimal()
     
     Card(
@@ -370,7 +372,7 @@ fun DayDetailPanel(
                         }
                         AmountText(
                             amount = record.amount,
-                            isExpense = record.flowType.value == 0
+                            isExpense = record.flowType == FlowType.EXPENSE
                         )
                     }
                 }

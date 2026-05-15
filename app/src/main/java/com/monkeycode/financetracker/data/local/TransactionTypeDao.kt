@@ -1,7 +1,7 @@
 package com.monkeycode.financetracker.data.local
 
 import androidx.room.*
-import com.monkeycode.financetracker.data.model.FlowType
+import com.monkeycode.financetracker.domain.model.FlowType
 import com.monkeycode.financetracker.data.model.TransactionTypeEntity
 import kotlinx.coroutines.flow.Flow
 import java.time.LocalDateTime

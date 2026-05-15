@@ -4,6 +4,7 @@ import com.monkeycode.financetracker.data.mapper.toDomain
 import com.monkeycode.financetracker.data.mapper.toEntity
 import com.monkeycode.financetracker.data.model.toSafeBigDecimal
 import com.monkeycode.financetracker.domain.model.FinanceRecord
+import com.monkeycode.financetracker.domain.model.FlowType
 import com.monkeycode.financetracker.domain.model.QueryCondition
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -19,7 +20,7 @@ class FinanceRepository @Inject constructor(
 
     suspend fun getRecords(condition: QueryCondition): List<FinanceRecord> {
         return financeRecordDao.getRecords(
-            flowType = condition.flowType?.let { com.monkeycode.financetracker.data.model.FlowType.valueOf(it.name) },
+            flowType = condition.flowType,
             transactionTypeId = condition.transactionTypeId,
             hasImage = condition.hasImage,
             remarkKeyword = condition.remarkKeyword,
@@ -74,7 +75,7 @@ class FinanceRepository @Inject constructor(
 
     suspend fun getFilteredStats(condition: QueryCondition): Pair<BigDecimal, BigDecimal> {
         val result = financeRecordDao.getFilteredStats(
-            flowType = condition.flowType?.let { com.monkeycode.financetracker.data.model.FlowType.valueOf(it.name) },
+            flowType = condition.flowType,
             transactionTypeId = condition.transactionTypeId,
             hasImage = condition.hasImage,
             remarkKeyword = condition.remarkKeyword,

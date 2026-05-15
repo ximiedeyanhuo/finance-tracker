@@ -3,7 +3,9 @@ package com.monkeycode.financetracker.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.monkeycode.financetracker.data.repository.FinanceRepository
+import com.monkeycode.financetracker.domain.model.CategoryStats
 import com.monkeycode.financetracker.domain.model.DailyStats
+import com.monkeycode.financetracker.domain.model.FlowType
 import com.monkeycode.financetracker.domain.model.MonthlyStats
 import com.monkeycode.financetracker.domain.model.WeeklyStats
 import com.monkeycode.financetracker.domain.model.YearlyStats
@@ -95,6 +97,27 @@ class YearlyStatsViewModel @Inject constructor(
             val stats = statsService.getYearlyStats(startYear, endYear)
             _isLoading.value = false
             _yearlyStats.value = stats
+        }
+    }
+}
+
+@HiltViewModel
+class CategoryStatsViewModel @Inject constructor(
+    private val statsService: StatsService
+) : ViewModel() {
+
+    private val _categoryStats = MutableStateFlow<List<CategoryStats>>(emptyList())
+    val categoryStats: StateFlow<List<CategoryStats>> = _categoryStats.asStateFlow()
+
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+
+    fun loadStats(startDate: LocalDate, endDate: LocalDate, flowType: FlowType) {
+        viewModelScope.launch {
+            _isLoading.value = true
+            val stats = statsService.getCategoryStats(startDate, endDate, flowType)
+            _isLoading.value = false
+            _categoryStats.value = stats
         }
     }
 }

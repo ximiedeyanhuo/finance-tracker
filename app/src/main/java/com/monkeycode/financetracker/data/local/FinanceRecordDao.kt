@@ -3,7 +3,7 @@ package com.monkeycode.financetracker.data.local
 import androidx.paging.PagingSource
 import androidx.room.*
 import com.monkeycode.financetracker.data.model.FinanceRecordEntity
-import com.monkeycode.financetracker.data.model.FlowType
+import com.monkeycode.financetracker.domain.model.FlowType
 import kotlinx.coroutines.flow.Flow
 import java.time.LocalDate
 
