@@ -1,14 +1,6 @@
 package com.monkeycode.financetracker.ui.screens.detail
 
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarToday
@@ -26,7 +18,7 @@ import java.math.BigDecimal
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddEditRecordDialog(
     record: FinanceRecord? = null,
@@ -146,9 +138,8 @@ fun AddEditRecordDialog(
                 } else {
                     Text("收支类型 *", style = MaterialTheme.typography.bodyMedium)
                     Spacer(modifier = Modifier.height(8.dp))
-                    FlowRow(
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
+                    // Simple chip wrapping layout using Row + wrap content
+                    Column(modifier = Modifier.fillMaxWidth()) {
                         types.forEach { type ->
                             FilterChip(
                                 selected = type.id == transactionTypeId,
